@@ -1,0 +1,54 @@
+@(printers: List[Printer])
+
+@main("Printers") {
+<h2>Printers</h2>
+
+<script>
+     function del(urlToDelete) {
+        $.ajax({
+          url: urlToDelete,
+          type: 'DELETE',
+          success: function(results) {
+            // Refresh the page
+            location.reload();
+          }
+        });
+      }
+   </script>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th><a href="@routes.Printers.sortManufacturer()">Manufacturer</a></th>
+        <th><a href="@routes.Printers.sortModel()">Model</a></th>
+        <th><a href="@routes.Printers.sortSerial()">Serial Number</a></th>
+        <th><a href="@routes.Printers.sortIp()"> IPv4 Address</a></th>
+        <th><a href="@routes.Printers.sortLocation()">Location</a> </th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    @for(printer <- printers) {
+
+
+        <tr>
+            <td>@printer.manufacturer</td>
+            <td>@printer.model</td>
+            <td><a href="@routes.Printers.details(printer.serialNumber)">@printer.serialNumber</a> </td>
+            <td><a target="_blank" href="http://@printer.ipAddress"> @printer.ipAddress</a></td>
+            <td>@printer.location</td>
+            <td id="status">@printer.status</td>
+            <td>
+                <a href="@routes.Printers.details(printer.serialNumber)"><i class="icon icon-pencil"></i> </a>
+                <a onclick="javascript:del('@routes.Printers.delete(printer.serialNumber)')"><i class="icon icon-trash"></i></a>
+            </td>
+
+        </tr>
+    }
+    </tbody>
+</table>
+
+<a href="@routes.Printers.newPrinter()" class="btn">
+    <i class="icon-plus"></i> New Printer</a>
+
+}

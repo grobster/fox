@@ -1,0 +1,19 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.Application.index()
+GET     /printers/                  controllers.Printers.list()
+GET     /printers/new               controllers.Printers.newPrinter()
+GET     /printers/:serial           controllers.Printers.details(serial: String)
+GET     /sort-model                 controllers.Printers.sortModel()
+GET     /sort-location              controllers.Printers.sortLocation()
+GET     /sort-serial                controllers.Printers.sortSerial()
+GET     /sort-ip                    controllers.Printers.sortIp()
+GET     /sort-manufacturer          controllers.Printers.sortManufacturer()
+DELETE  /printers/:serial           controllers.Printers.delete(serial: String)
+POST    /printers/                  controllers.Printers.save()
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)

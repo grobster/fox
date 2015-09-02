@@ -1,0 +1,21 @@
+@(printerForm: Form[Printer])
+@import helper._
+@import helper.twitterBootstrap._
+
+@main("Printer form") {
+    <h1>Printer form</h1>
+    @helper.form(action = routes.Printers.save()) {
+        <fieldset>
+
+            <legend>Printer (@printerForm("serialNumber").valueOr("New"))</legend>
+            @helper.inputText(printerForm("manufacturer"), '_label -> "Manufacturer")
+            @helper.inputText(printerForm("model"), '_label -> "Model")
+            @helper.inputText(printerForm("serialNumber"), '_label -> "Serial Number")
+            @helper.inputText(printerForm("ipAddress"), '_label -> "IPv4 Address")
+            @helper.inputText(printerForm("location"), '_label -> "Location")
+
+        </fieldset>
+        <input type="submit" class="btn btn-primary" value="Save">
+
+    }
+}
